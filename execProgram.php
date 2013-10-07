@@ -45,4 +45,6 @@
 	
 	// copy the image to the assigned directory
 	copy("stitich.jpg", $newDirectoryName."/".$count."jpg"); 
+	
+	header("Location:index.php");
 ?>

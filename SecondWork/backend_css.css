@@ -98,33 +98,38 @@ code, kbd, samp {
 }
 #main {
 	width :890px;
-	height:300px;
+	height:370px;
 	float :left;
 	padding:30px;
 	
 
 }
 #main_top{
-
+	height:80px;
+	width:580px;
 	font-size:30px;
 	letter-spacing:15px; 
 	line-height:60px; 
 	font-weight:bold;
-	text-align:center;
+	text-align:right;
+	float:left;
 }
+
 #main_contents{
 	border:1px solid gray;
-	width :800px;
+	width :830px;
 	height:180px;
 	font-size:25px;
 	letter-spacing:5px; 
 	margin: 0px auto;
 	padding : 10px;
 	line-height:60px;
+	float:left;
 	
 }
  #uploadButton{
 	font-size:30px;
+
 	text-align:right;
 	width:860px;
 	float :left;

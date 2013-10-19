@@ -24,7 +24,7 @@ foreach($_FILES["imageFile"]["error"] as $key => $error){
 		header("Location: backend.php"); 
 	}
 	//for imageFile upload 
-	$allowedExts_imageFile = array("gif", "jpeg", "jpg", "png"); //W3C standard file upload procedure
+	$allowedExts_imageFile = array("gif", "jpeg", "jpg", "png","JPG"); //W3C standard file upload procedure
 	$temp_imageFile = explode(".", $_FILES["imageFile"]["name"][$key]);
 	$extension_imageFile = end($temp_imageFile);
 
@@ -63,26 +63,11 @@ foreach($_FILES["imageFile"]["error"] as $key => $error){
 			$file =$destDir.$file_img; 
 			$source_properties = getimagesize($file);
 			$image_type = $source_properties[2]; 
-			$resizeFileName = "resize".$count;
-			if( $image_type == IMAGETYPE_JPEG ) {   
-				$image_resource_id = imagecreatefromjpeg($file);  
-				$target_layer = fn_resize($image_resource_id,$source_properties[0],$source_properties[1]);
-				imagejpeg($target_layer,$destDir.$resizeFileName.".jpg");
-				chmod($destDir.$resizeFileName.".jpg",0644);
-			}
-			elseif( $image_type == IMAGETYPE_GIF )  {  
-				$image_resource_id = imagecreatefromjpeg($file);
-				$target_layer = fn_resize($image_resource_id,$source_properties[0],$source_properties[1]);
-				imagejpeg($target_layer,$destDir.$resizeFileName.".jpg");
-				chmod($destDir.$resizeFileName.".jpg",0644);
-			}
-			elseif( $image_type == IMAGETYPE_PNG ) {
-				$image_resource_id = imagecreatefromjpeg($file); 
-				$target_layer = fn_resize($image_resource_id,$source_properties[0],$source_properties[1]);
-				imagejpeg($target_layer,$destDir.$resizeFileName.".jpg");
-				chmod($destDir.$resizeFileName.".jpg",0644);
-			}
-		
+			$resizeFileName = "resize".$count.".jpg";   
+			$image_resource_id = imagecreatefromjpeg($file);  
+			$target_layer = fn_resize($image_resource_id,$source_properties[0],$source_properties[1]);
+			imagejpeg($target_layer,$destDir.$resizeFileName);
+			chmod($destDir.$resizeFileName,0644);	
 		}	//resize finish	
 	}
 

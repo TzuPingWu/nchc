@@ -22,7 +22,6 @@ else{
 		$deletePic = $cur;
 		$sql_query = "DELETE FROM `SecondWorkUpload_v2` WHERE count ='".$deletePic."'";
 		mysql_query($sql_query) or die ("Delete Error ! ".mysql_error()); 
-		//unlink($destDir.$deletePic);
 		delTree($destDir);
 		//刪掉資料夾*/
 	}

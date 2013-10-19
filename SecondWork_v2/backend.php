@@ -61,8 +61,7 @@ if(isset($_GET["logout"])&&$_GET["logout"]=="true"){
 			
 			<div id = "main_contents">
 				<form action = "uploadAdmin.php" method = "post" enctype="multipart/form-data">
-					WebM檔案上載 <input type = "file" name = "videoFile"  value ="video" /></br>
-					<span style = "letter-spacing:6px; ">縮圖影像上載 </span>&nbsp;&nbsp;<input type = "file" name = "imageFile" value ="image"/></br>
+					圖片檔案上載 <input name="imageFile[]" type="file" multiple="multiple" /></br>
 					檔案文字說明:&nbsp;&nbsp;<input type = "text" name = "descriptionText" required /> 
 			</div>
 			<div id = "uploadButton"><input type="submit" value="上載檔案"/></div>
@@ -71,27 +70,37 @@ if(isset($_GET["logout"])&&$_GET["logout"]=="true"){
 			
 		</div>
 	<?php
-	$query_video = "SELECT * FROM  `SecondWorkUpload_v2`";
-	$video= mysql_query($query_video) or die(mysql_error());
-	?>
 	
+	$query_count = "SELECT count FROM `SecondWorkAdminMember_v2`";
+	$resultCount = mysql_query($query_count) or die(mysql_error());
+	?>
 	<div id = "bottom">
 		<form action = "backendDel.php" method = "post">
-		<?php		
-			while($row = mysql_fetch_array($video)){	
+		<?php	
+			$rowCount = mysql_fetch_array($resultCount);//抓出管理者資料庫資料
+			$count = $rowCount["count"];//只需要count的資訊
+			for($i=1;$i<=$count;$i++){	//for迴圈跑
+					
+			$query_image = "SELECT * FROM `SecondWorkUpload_v2` WHERE count = '".$i."'";
+			$image= mysql_query($query_image) or die(mysql_error());			
+			$row = mysql_fetch_array($image);//抓出上傳資料庫資料			
+			if(is_dir("uploadAdminPic/".$i)){
 		?>		<div id="bottom_pic">
-					<img src="uploadAdminPic/<?php echo $row["imageFile"]?>  "/></br>
+					<img src="uploadAdminPic/<?php echo $i."/resize".$i.".jpg";?>  "/></br>
 					<?php 
 						$cutno = 5;
-						$descriptionDisplay=cutword($row["descriptionText"],$cutno);
-
+						$descriptionDisplay=cutword($row["descriptionText"],$cutno); 
 						echo $descriptionDisplay;
 					?>
 					</br>
-					<input type = "checkbox" name = "delete[]" value = "<?php echo $row["imageFile"]?>*<?php echo $row["videoFile"]?>"/>
+					<input type = "checkbox" name = "delete[]" value = "<?php echo $row["imageFile"]?>"/>
 					
 				</div>
-		<?php } ?>	
+		<?php }//如果目錄存在
+			else{//目錄不存在
+				continue;
+			}
+		}//for 迴圈結束 ?>	
 		
 	</div>
 		<div id = "deleteButton"><input type = "submit" value = "確認刪除"/></div>

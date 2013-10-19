@@ -93,7 +93,7 @@ if(isset($_GET["logout"])&&$_GET["logout"]=="true"){
 						echo $descriptionDisplay;
 					?>
 					</br>
-					<input type = "checkbox" name = "delete[]" value = "<?php echo $row["imageFile"]?>"/>
+					<input type = "checkbox" name = "delete[]" value = "<?php echo $i;?>"/>
 					
 				</div>
 		<?php }//如果目錄存在

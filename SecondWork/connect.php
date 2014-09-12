@@ -1,7 +1,7 @@
 <?php
 	header("Content-Type: text/html; charset=utf-8");
-	$db_link=@mysql_connect("dbhome.cs.nctu.edu.tw","tzpwu_cs","judy7839");
-	if(!$db_link) die("³s½u¥¢±Ñ");
-	if(!@mysql_select_db("tzpwu_cs")) die("¸ê®Æ®w¿ï¾Ü¥¢±Ñ"); 
+	$db_link=@mysql_connect("dbhome.cs.nctu.edu.tw","","");
+	if(!$db_link) die("Â³sÂ½uÂ¥Â¢Â±Ã‘");
+	if(!@mysql_select_db("tzpwu_cs")) die("Â¸ÃªÂ®Ã†Â®wÂ¿Ã¯Â¾ÃœÂ¥Â¢Â±Ã‘"); 
 	mysql_query("SET NAMES 'utf8'"); 
 ?>
